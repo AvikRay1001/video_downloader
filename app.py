@@ -22,7 +22,9 @@ def download():
 
     loader = instaloader.Instaloader(
         dirname_pattern=DOWNLOAD_FOLDER,
-        download_pictures=False
+        download_pictures=False,
+        download_video_thumbnails=False,
+        save_metadata=False
     )
 
     shortcode = url.split("/")[-2]
@@ -36,3 +38,8 @@ def download():
         return jsonify({"error": "Download failed"})
 
     return send_file(files[-1], as_attachment=True)
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
